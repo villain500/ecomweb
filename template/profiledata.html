@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}E-comweb customers profile{% endblock title %}
+{% block body %}
+  <div class="container">
+    {% for customers in customer %}
+        <table class="table">
+            <tbody>
+              <tr>
+                <th scope="row">Name:</th>
+                <td>{{customers.Name}}</td>
+              </tr>
+              <tr>
+                <th scope="row">City:</th>
+                <td>{{customers.City}}</td>
+              </tr>
+              <tr>
+                <th scope="row">Address</th>
+                <td colspan="2">{{customers.Area}}</td>
+              </tr>
+              <tr>
+                <th scope="row">Phone Number</th>
+                <td colspan="2">{{customers.Phone_Number}}</td>
+              </tr>
+              <tr>
+                <th scope="row">Zipcode</th>
+                <td colspan="2">{{customers.Zipcode}}</td>
+              </tr>
+              
+            </tbody>
+        </table>
+    {% endfor %}
+  </div>
+{% endblock body %}

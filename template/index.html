@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block title %}E-comweb-Best Online Shoping Plateform{% endblock title %}
+
+{% block body %}
+
+
+<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+  {% for message in messages %}
+    <div style="margin-bottom: 0px;" class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+        {{message}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  {% endfor %}
+
+    <div class="carousel-inner">
+        {% for imgs in slider %}
+            <div class="carousel-item {% if forloop.counter0 == 0 %}active{% endif %}">
+                <img src="media/{{imgs.Slider_Image}}" class="d-block w-100" alt="...">
+            </div>
+        {% endfor %}
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+
+{% comment %} {% for count in count_product %} {% endcomment %}
+  <section id="counts" style="background-color: #f7f8fa;" class="counts py-5 section-bg">
+    <div class="container">
+      <div class="row counters">
+        <div class="col-lg-4 col-6 text-center">
+          <span data-purecounter-start="0" data-purecounter-end="232" data-purecounter-duration="0" class="purecounter">{{counted_visitors}}</span>
+          <p><span><i class="fa-solid fa-eye"></i></span> Total Visitor</p>
+        </div>
+
+        <div class="col-lg-4 col-6 text-center">
+          <span data-purecounter-start="0" data-purecounter-end="521" data-purecounter-duration="0" class="purecounter">{{count_product}}</span>
+          <p><span><i class="fa-solid fa-cart-plus"></i></span> Total Products</p>
+        </div>
+
+        <div class="col-lg-4 col-6 text-center">
+          <span data-purecounter-start="0" data-purecounter-end="1463" data-purecounter-duration="0" class="purecounter">{{count_orders}}</span>
+          <p><span><i class="fa-solid fa-clipboard-list"></i></span> Total Orders Placed</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  {% comment %} {% endfor %} {% endcomment %}
+  
+
+{% endblock body %}
+

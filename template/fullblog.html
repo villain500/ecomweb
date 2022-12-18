@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<section class="container pt-4 news">
+    <img src="/media/{{blog.Blog_Image}}" class="img-fluid" alt="...">
+    <p class="fs-2 pt-4">{{blog.Blog_Title}}</p>
+    {{blog.Blog_Description | safe}}
+</section>
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}You can see all products in this page{% endblock title %}
+{% block body %}
+
+<form method="get" class="d-flex dropdownposition container mt-2">
+  <input class="form-control me-2" type="search" name="search" placeholder="Search" aria-label="Search">
+  <button class="btn btn-outline-danger" type="submit">Search</button>
+</form>
+<div style="top: 110px;" class="dropdown dropdownposition">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown"
+    aria-expanded="false">
+    Select Category
+  </button>
+
+  <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
+    <li><a class="dropdown-item " href="{% url 'allproducts' %}">All Products</a></li>
+    {% for items in categories %}
+    <li><a class="dropdown-item" href="{% url 'allproducts' %}?category={{ items.name }}">{{ items.name }}</a></li>
+    {% endfor %}
+  </ul>
+</div>
+
+<div class="container product-showing">
+  {% comment %} <form method="get" class="d-flex  mt-2">
+    <input class="form-control me-2" type="search" name="search" placeholder="Search" aria-label="Search">
+    <button class="btn btn-outline-danger" type="submit">Search</button>
+  </form> {% endcomment %}
+  <div class="row">
+    {% for item in allproducts %}
+    <div class="col-xl-3 col-md-4 col-sm-6 mr-1 my-2">
+      <div class="card prod_data" style="width: 17rem;">
+        <img src="/media/{{item.Product_Image}}" style="height: 215px;" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title" style="height: 3rem;"><a style="text-decoration:none ;color: #212529;"
+              href="{% url 'productview' %}?Product-name={{ item.Product_Name }}">{{item.Product_Name | safe}}</a></h5>
+          <p class="card-text des">{{item.Short_Description | safe}}</p><br>
+          <p class="card-text">{{item.Price}}</p>
+          <!-- <form action="{% url 'allproducts' %}" method="post">{% csrf_token %} -->
+          <a href="{% url 'productview' %}?Product-name={{ item.Product_Name }}" class="btn btn-green w-100">View
+            Product</a>
+          <!-- <input type="hidden" prod_id="{{item.id}}"  class="product_id" value="{{item.id}}">
+              <input type="submit" class="btn btn-org addtocart"  value="Add to cart"> -->
+          <!-- </form> -->
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock body %}

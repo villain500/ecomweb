@@ -1,0 +1,62 @@
+{% extends 'base.html' %} 
+{% block title %}Create Account{% endblock %} 
+{% block body %}
+<div class="container sign-upp pt-4">
+    <span><i class="fa-solid fa-user"></i></span>
+
+    
+
+    <h2 class="text-center mt-2 mb-4">Create New Account</h2>
+    <div class="row">
+        <div class="col-4"></div>
+        <div class="col-4">
+            {% for message in messages %}
+                <div class="alert alert-{{message.tags}} alert-dismissible fade show mt-3" role="alert">
+                    {{message}}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                 </div>
+            {% endfor %}
+            <form method="post">{% csrf_token %}
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Username</label>
+                    <input type="text" name="username" class="form-control" id="">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">First Name</label>
+                    <input type="text" name="fname" class="form-control" id="exampleFormControlInput1" required>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Last Name</label>
+                    <input type="text" name="lname" class="form-control" id="exampleFormControlInput1" required>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Email address</label>
+                    <input type="email" name="email" class="form-control" id="exampleFormControlInput1" required>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Phone Number</label>
+                    <input type="number" name="phonenum" class="form-control" id="exampleFormControlInput1" required>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Password</label>
+                    <input type="password" name="password" class="form-control" id="exampleFormControlInput1" required>
+                </div>
+                <div class="mb-1">
+                    <label for="exampleInputPassword1" class="form-label">Confirm Password</label>
+                    <input type="Password" name="confirm_pass" class="form-control" id="exampleFormControlInput1" required>
+                </div>
+                
+                    {% for message in msg %}
+                    <p style="color: red; font-size: 14px;">{{message}}</p> 
+                    {% endfor %}
+                
+                <input type="Submit" value="Create" class="btn btn-org">
+            </form>
+            <div class="login mb-4">
+                <p>Already have an account? than-<a style="text-decoration: none;" href="{% url 'login' %}">Log in</a></p>
+            </div>
+        </div>
+        <div class="col-4"></div>
+    </div>
+</div>
+{% endblock body %}

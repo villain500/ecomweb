@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block title %}{% endblock title %}
+{% block body %}
+
+{% for message in messages %}
+  <div class="alert alert-{{message.tags | safe}} alert-dismissible fade show" role="alert">
+    {{message}}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  {% endfor %}
+    <div class="container mt-4 pt-3 prodview">
+        {% for items in allproducts %}
+        <div class="row m-0">
+            <div class="col-lg-4 left-side-product-box pb-3">
+                <img src="/media/{{items.Product_Image}}" class="border p-3">
+            </div>
+            <div class="col-lg-8">
+                <div class="right-side-pro-detail border p-3 m-0">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <span>{{items.Short_Description | safe}}</span>
+                            <p class="mb-0 mt-1 p-0">{{items.Product_Name |safe}}</p>
+                        </div>
+                        <div class="col-lg-12">
+                            <p class="m-0 p-0 price-pro">{{items.Price}} Tk.</p>
+                            <hr class="p-0 m-0">
+                        </div>
+                        <div class="col-lg-12 pt-2">
+                            <h5>Product Detail</h5>
+                            <span>{{items.Product_Description | safe}}</span>
+                            <hr class="m-0 pt-2 mt-2">
+                        </div>
+                        <div class="col-lg-12 mt-3">
+                            <div class="row">
+                                <div class="col-lg-6 pb-2">
+                                    <form method="post">{% csrf_token %}
+                                        <input type="text" hidden name="product_id" value="{{items.id}}">
+                                        <input type="submit" class="btn btn-org w-100" value="Add to cart">
+                                </div>
+                                <div class="col-lg-6">
+                                    <a href="#" class="btn btn-green w-100">Shop Now</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+
+
+{% endblock body %}

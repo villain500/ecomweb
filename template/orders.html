@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}E-comweb order page{% endblock title %}
+{% block body %}
+
+<section class="h-100 gradient-custom">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-lg-10 col-xl-10">
+        <div class="card" style="border-radius: 10px;">
+          <div class="card-header px-4 py-5">
+            <h5 class="text-muted mb-0">Thanks for your Order, <span style="color: #a8729a;">{{request.user}}</span>!</h5>
+          </div>
+          <div class="card-body p-4">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+              <p class="lead fw-normal mb-0" style="color: #a8729a;">Receipt</p>
+            </div>
+            {% for items in orders %}
+            <div class="card shadow-0 border mb-4">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-2">
+                    <img src="{{items.Product.Product_Image.url}}" class="img-fluid" alt="Phone">
+                  </div>
+                  <div class="col-md-4 text-center d-flex justify-content-center align-items-center">
+                    <p class="text-muted mb-0">{{items.Product.Product_Name}}</p>
+                  </div>
+                  <div class="col-md-3 text-center d-flex justify-content-center align-items-center">
+                    <p class="text-muted mb-0 small">Quantity: {{items.Quantity}}</p>
+                  </div>
+                  <div class="col-md-3 text-center d-flex justify-content-center align-items-center">
+                    <p class="text-muted mb-0 small">{{items.product_total}}</p>
+                  </div>
+                </div>
+                <hr class="mb-4" style="background-color: #e0e0e0; opacity: 1;">
+                <p class="lead fw-bold mb-4 pb-2" style="color: #f37a27;">Tracking Order:</p>
+
+                <div class="progressbar align-items-center">
+                  <div class="progress-track">
+                    
+                      {% if items.Status == 'Pending' %}
+                      <ul id="progressbar">
+                      <li class="step0 " id="step1">
+                        <p>Order Confirmed</p>
+                      </li>
+                      <li class="step0" id="step2">
+                        <p style="margin-left: 35px;">Packing</p>
+                      </li>
+                      <li class="step0 text-right" id="step3">
+                        <p style="margin-left: 85px;">On the way</p>
+                      </li>
+                      <li class="step0" style="text-align:right;" id="step4">Delivered</li>
+                    </ul>
+                    <p style="text-align: center; margin-bottom: 0;">Pending</p>
+                    <img src="{% static 'img/pending.gif' %}"  style="margin: auto; display: block;" height="100px" width="auto" alt="">
+                      {% elif items.Status == 'Accepted' %}
+                      <ul id="progressbar">
+                      <li class="step0 active" id="step1">
+                        <p>Order Confimed</p>
+                      </li>
+                      <li class="step0" id="step2">
+                        <p style="margin-left: 35px;">Packing</p>
+                      </li>
+                      <li class="step0 text-right" id="step3">
+                        <p style="margin-left: 85px;">On the way</p>
+                      </li>
+                      <li class="step0" style="text-align:right;" id="step4">Delivered</li>
+                    </ul>
+                    <img src="{% static 'img/orderaccespted.gif' %}" style="margin: auto; display: block;" height="100px" width="auto" alt="">
+                      {% elif items.Status == 'Packed' %}
+                      <ul id="progressbar">
+                      <li class="step0 active" id="step1">
+                        <p>Order Confirmed</p>
+                      </li>
+                      <li class="step0 active" id="step2">
+                        <p style="margin-left: 35px;">Packing</p>
+                      </li>
+                      <li class="step0 text-right" id="step3">
+                        <p style="margin-left: 85px;">On the way</p>
+                      </li>
+                      <li class="step0" style="text-align:right;" id="step4">Delivered</li>
+                    </ul>
+                    <img src="{% static 'img/caixa.gif' %}" style="margin: auto; display: block;" height="100px" width="auto" alt="">
+                      {% elif items.Status == 'On the way' %}
+                      <ul id="progressbar">
+                      <li class="step0 active" id="step1">
+                        <p>Order Confirmed</p>
+                      </li>
+                      <li class="step0 active" id="step2">
+                        <p style="margin-left: 35px;">Packing</p>
+                      </li>
+                      <li class="step0 text-right active" id="step3">
+                        <p style="margin-left: 85px;">On the way</p>
+                      </li>
+                      <li class="step0" style="text-align:right;" id="step4">Delivered</li>
+                    </ul>
+                    <img src="{% static 'img/ontheway.gif' %}" style="margin: auto; display: block;" height="100px" width="auto" alt="">
+                      {% elif items.Status == 'Delivered' %}
+                      <h3 style="text-align: center;text-align: center;margin-top: -20px;" class="colorr">Horrah! Product Delivered</h3>
+                    <img src="{% static 'img/delivered.gif' %}" style="margin: auto; display: block;" height="100px" width="auto" alt="">
+                      {% endif %}
+                    
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+          {% comment %} <div class="card-footer border-0 px-4 py-5"
+            style="background-color: #ea5324; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
+            <h5 class="d-flex align-items-center justify-content-end text-white text-uppercase mb-0">Total
+              paid: <span class="h2 mb-0 ms-2">$1040</span></h5>
+          </div> {% endcomment %}
+        </div>
+</section>
+
+
+
+{% endblock body %}

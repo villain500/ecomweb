@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}E-comweb Blogs{% endblock title %}
+{% block body %}
+
+
+<div class="container mt-3">
+  <div class="row mb-3">
+    {% for items in blog %}
+    <div class="col-md-6 col-sm-12 mr-1">
+      <div class="card">
+        <img src="/media/{{items.Blog_Image}}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title d-inline-block col-sm-12 text-truncate ">{{items.Blog_Title}}</h5>
+          <a class="btn btn-org" href="/full-blog/{{items.Blog_slug}}">View Full Blog</a>
+        </div>
+      </div>
+    </div>
+    {% empty %}
+    No Blog have in this page.....
+    {% endfor %}
+  </div>
+
+
+
+  <!-- paginator part starts here -->
+  <nav aria-label="...">
+    <ul class="mt-2 pagination">
+      {% if blog.has_previous %}
+        <li class="page-item">
+          <a class="page-link" href="/blogs/?pagenumber=1" tabindex="-1" aria-disabled="true">First page</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="/blogs/?pagenumber={{blog.previous_page_number}}" tabindex="-1" aria-disabled="true">Previous</a>
+        </li>
+      {% endif %}
+      {% for pages in totalpage %}
+        <li class="page-item"><a class="page-link" href="/blogs/?pagenumber={{pages}}">{{pages}}</a></li>
+      {% endfor %}
+      {% if blog.has_next %}
+        <li class="page-item">
+          <a class="page-link" href="/blogs/?pagenumber={{blog.next_page_number}}">Next</a>
+        </li>
+      {% endif %}
+    </ul>
+  </nav>
+
+</div>
+
+{% endblock body %}
